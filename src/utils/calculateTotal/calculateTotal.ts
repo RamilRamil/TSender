@@ -7,6 +7,8 @@ export function calculateTotalAmount(amounts: string): number {
       .filter((amt) => amt.length > 0)
       .reduce((sum, amt) => {
         const num = Number(amt);
-        return isNaN(num) ? sum : sum + num;
+        if (isNaN(num)) throw new Error(`Invalid amount: "${amt}"`);
+        if (num < 0) throw new Error(`Negative amounts are not allowed: ${amt}`);
+        return sum + num;
       }, 0);
 }

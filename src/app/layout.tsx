@@ -3,6 +3,7 @@ import "./globals.css";
 import { type ReactNode } from "react";
 import { Providers } from "./providers";
 import Header from "../components/Header";
+import { Toaster } from "sonner";
 
 export const metadata: Metadata = {
   title: "TSender UI",
@@ -16,6 +17,7 @@ export default function RootLayout(props: { children: ReactNode }) {
         <Providers>
           <Header />
           {props.children}
+          <Toaster position="bottom-right" richColors />
         </Providers>
       </body>
     </html>
