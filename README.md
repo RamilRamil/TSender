@@ -10,4 +10,4 @@
    )
    ```
 4. e2e testing
-5. Deploy to fleek
+5. Deploy to filebase
