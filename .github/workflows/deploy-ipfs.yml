@@ -8,6 +8,8 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
+    env:
+      NEXT_PUBLIC_PROJECT_ID: ${{ secrets.NEXT_PUBLIC_PROJECT_ID }}
 
     steps:
       - name: Checkout
@@ -26,6 +28,14 @@ jobs:
 
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
+
+      - name: Verify NEXT_PUBLIC_PROJECT_ID
+        run: |
+          if [ -z "$NEXT_PUBLIC_PROJECT_ID" ]; then
+            echo "Error: NEXT_PUBLIC_PROJECT_ID secret is not set in repository settings"
+            exit 1
+          fi
+          echo "NEXT_PUBLIC_PROJECT_ID is configured"
 
       - name: Build static site
         run: pnpm run build
